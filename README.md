@@ -13,8 +13,8 @@ The framework has been implemented on two representative QAS algorithms, Quantum
 
 Contents
     TD-DQAS: Contains the implementation of the TD-QAS framework with DQAS.
+    
     TD-QuantumSuper: Contains the implementation of the TD-QAS framework with QuantumSupernet.
+    
     README.md: This file.
-    Main Scripts:
-      TD-DQAS:
-      TD-Quantumsuper:
+    
