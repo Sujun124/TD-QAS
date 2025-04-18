@@ -55,7 +55,7 @@ def best_architecture2presnt_DQAS(best_archi):
 
 def gate_list_sample(param):
     """
-    这个函数是专门为qas这种需要频繁切换线路设计的，具体原理不大好讲清楚，看makec里的select_gate函数的实现，可能就明白了，只可意会
+    这个函数是专门为qas这种需要频繁切换线路设计的
     :param param: 单个门的旋转角参数
     :return: 当前门的表示方式的集合，它会被输入make_c的select_gate函数中，最终只会有一个奏效
     这个专门为了这个gate_set下，假如以后要换量子门种类，这个还是作为输入吧，这个作为一个例子放在这里
@@ -73,7 +73,7 @@ def gate_list_sample(param):
 
 def gate_list_sample_RXCNOT(param):
     """
-    这个函数是专门为qas这种需要频繁切换线路设计的，具体原理不大好讲清楚，看makec里的select_gate函数的实现，可能就明白了，只可意会
+    这个函数是专门为qas这种需要频繁切换线路设计的，具体原理不大好讲清楚
     :param param: 单个门的旋转角参数
     :return: 当前门的表示方式的集合，它会被输入make_c的select_gate函数中，最终只会有一个奏效
     这个专门为了这个gate_set下，假如以后要换量子门种类，这个还是作为输入吧，这个作为一个例子放在这里
