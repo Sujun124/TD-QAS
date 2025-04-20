@@ -37,12 +37,6 @@ class VQE():
 
 
     def gate_list_sample(self, param):
-        """
-        这个函数是专门为qas这种需要频繁切换线路设计的，具体原理不大好讲清楚，看makec里的select_gate函数的实现
-        :param param: 单个门的旋转角参数
-        :return: 当前门的表示方式的集合，它会被输入make_c的select_gate函数中，最终只会有一个奏效
-        这个专门为了这个gate_set下，假如以后要换量子门种类，这个还是作为输入吧，这个作为一个例子放在这里
-        """
         l = [
             tc.gates.Gate(self.K.eye(4)),
             tc.gates.Gate(self.K.kron(tc.gates._h_matrix.astype('complex128'), self.K.eye(2))),
@@ -55,16 +49,6 @@ class VQE():
         return [tc.backend.reshape2(m.tensor) for m in l if isinstance(m, tc.gates.Gate)]
 
     def makec(self, param, structure, g):
-        """
-        :param param: 线路参数，由于makec参与jit，必须得是tensor
-        :param structure: 线路结构，由于makec参与jit，必须得是tensor
-        :return: 返回线路实体，它本质上代表着vqe中的trail state
-
-        根据structure挨个将门加到c上。内层for循环会在每个qubit组合上根据structure作用一个门，structure是one_hot的，除了非0位置对应的
-        qubit组合外的组合都只会作用4*4的identity，等于什么都没做，只有非0的那个组合上会作用那个非零数字在gate_list中对应的门。这样每一个内层
-        for循环实际上等价于只作用一个门。这样确实增大了线路门数量，提升了计算开销，但由于不再需要if else判断语句，且tensor in tensor out,
-        我们可以jit,这将显著缩减优化线路所需时间。
-        """
         c = tc.Circuit(self.n)
         for i in range(structure.shape[0]):
             for j in range(structure.shape[1]):
